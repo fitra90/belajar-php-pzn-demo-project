@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"RegexText::testRegex":0.005}}
+{"version":1,"defects":{"Baim\\Belajar\\PHP\\MVC\\Config\\DatabaseTest::testGetConnection":4},"times":{"RegexText::testRegex":0.005,"Baim\\Belajar\\PHP\\MVC\\Config\\DatabaseTest::testGetConnection":0.013,"Baim\\Belajar\\PHP\\MVC\\Config\\DatabaseTest::testGetConnectionSingleton":0}}
