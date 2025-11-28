@@ -9,5 +9,8 @@
         <testsuite name="test register user">
             <file>tests/Repository/UserRepositoryTest.php</file>
         </testsuite>
+        <testsuite name="test register user service">
+            <file>tests/Service/UserServiceTest.php</file>
+        </testsuite>
     </testsuites>
 </phpunit>
