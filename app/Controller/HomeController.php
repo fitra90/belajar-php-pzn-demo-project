@@ -9,7 +9,7 @@ class HomeController
     function index(): void 
     {
         $model = [
-            "title" => "Belajar PHP MVC",
+            "title" => "PHP Login Management",
             "content" => "Selamat Belajar PHP MVC dari Programmer Zaman Now!"
         ];
         

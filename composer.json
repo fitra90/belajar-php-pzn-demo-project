@@ -19,7 +19,9 @@
         }
     },
     "scripts": {
-        "test" : "phpunit --configuration phpunit.xml"
+        "test" : "phpunit --configuration phpunit.xml",
+        "test-render-view" : "phpunit --configuration phpunit.xml --testsuite \"test render view\"",
+        "test-register-user" : "phpunit --configuration phpunit.xml --testsuite \"test register user\""
     },
     "autoload-dev": {
         "psr-4": {

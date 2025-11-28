@@ -1,13 +1,13 @@
 <phpunit stopOnError="true">
-    <!-- <testsuites>
-        <testsuite name="regex">
-            <file>tests/RegexText.php</file>
-        </testsuite>
-    </testsuites> -->
     <testsuites>
         <testsuite name="dbconnection">
             <file>tests/Config/DatabaseTest.php</file>
         </testsuite>
+        <testsuite name="test render view">
+            <file>tests/App/ViewTest.php</file>
+        </testsuite>
+        <testsuite name="test register user">
+            <file>tests/Repository/UserRepositoryTest.php</file>
+        </testsuite>
     </testsuites>
-    
 </phpunit>
