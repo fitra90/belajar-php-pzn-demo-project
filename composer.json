@@ -22,7 +22,8 @@
         "test" : "phpunit --configuration phpunit.xml",
         "test-render-view" : "phpunit --configuration phpunit.xml --testsuite \"test render view\"",
         "test-register-user" : "phpunit --configuration phpunit.xml --testsuite \"test register user\"",
-        "test-register-user-service" : "phpunit --configuration phpunit.xml --testsuite \"test register user service\""
+        "test-register-user-service" : "phpunit --configuration phpunit.xml --testsuite \"test register user service\"",
+        "test-user-controller" : "phpunit --configuration phpunit.xml --testsuite \"test user controller\""
     },
     "autoload-dev": {
         "psr-4": {
