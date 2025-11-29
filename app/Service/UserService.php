@@ -8,6 +8,9 @@ use Baim\Belajar\PHP\MVC\Repository\UserRepository;
 use Baim\Belajar\PHP\MVC\Domain\User;
 use Baim\Belajar\PHP\MVC\Config\Database;
 use Baim\Belajar\PHP\MVC\Exception\ValidationException;
+use Baim\Belajar\PHP\MVC\Model\UserLoginRequest;
+use Baim\Belajar\PHP\MVC\Model\UserLoginResponse;
+use Exception;
 
 class UserService
 {
@@ -55,5 +58,32 @@ class UserService
             throw new ValidationException("Id, name, password jangan kosong");
         }
 
+    }
+
+    public function login(UserLoginRequest $request): UserLoginResponse
+    {
+        $this->validateUserLoginRequest($request);
+
+        $user = $this->userRepository->findById($request->id);
+
+        if ($user == null) {
+            throw new ValidationException("Id or password is wrong");
+        }
+
+        if (password_verify($request->password, $user->password)) {
+            $response = new UserLoginResponse();
+            $response->user = $user;
+            
+            return $response;
+        } else {
+            throw new ValidationException("Id or password is wrong");
+        }
+    }
+
+    private function validateUserLoginRequest(UserLoginRequest $request)
+    {
+        if ($request->id == null || $request->password == null || trim($request->id) == "" || trim($request->password) == "") {
+            throw new ValidationException(("Id, password can not blank"));
+        }
     }
 }

@@ -92,5 +92,77 @@ namespace Baim\Belajar\PHP\MVC\Controller{
             $this->expectOutputRegex('[user already exist]');
 
         }
+
+        public function testLogin()
+        {
+            $this->userController->login();
+
+            $this->expectOutputRegex('[Id]');
+            $this->expectOutputRegex('[Password]');
+            $this->expectOutputRegex('[Login User]');
+        }
+
+        public function testLoginSuccess()
+        {
+            $user = new User();
+            $user->id = "eko";
+            $user->name = "Eko";
+            $user->password = password_hash("eko123", PASSWORD_BCRYPT);
+
+            $this->userRepository->save($user);
+
+            $_POST['id'] = "eko";
+            $_POST['password'] = "eko123";
+
+            $this->userController->postLogin();
+
+            $this->expectOutputRegex("[Location: /]");
+
+        }
+
+        public function testLoginValidationError()
+        {
+            $_POST['id'] = '';
+            $_POST['password'] = '';
+
+            $this->userController->postLogin();
+
+            $this->expectOutputRegex('[Id]');
+            $this->expectOutputRegex('[Password]');
+            $this->expectOutputRegex('[Id, password can not blank]');
+        }
+
+        public function testLoginUserNotFound()
+        {
+            $_POST['id'] = 'eeqwe';
+            $_POST['password'] = 'sdfxcv';
+
+            $this->userController->postLogin();
+
+            $this->expectOutputRegex('[Id]');
+            $this->expectOutputRegex('[Password]');
+            $this->expectOutputRegex('[Id or password is wrong]');
+            $this->expectOutputRegex('[Login User]');
+        }
+
+        public function testLoginWrongPassword()
+        {
+            $user = new User();
+            $user->id = "eko";
+            $user->name = "Eko";
+            $user->password = password_hash("eko123", PASSWORD_BCRYPT);
+
+            $this->userRepository->save($user);
+
+            $_POST['id'] = 'eko';
+            $_POST['password'] = 'sdfxcv';
+
+            $this->userController->postLogin();
+
+            $this->expectOutputRegex('[Id]');
+            $this->expectOutputRegex('[Password]');
+            $this->expectOutputRegex('[Id or password is wrong]');
+            $this->expectOutputRegex('[Login User]');
+        }
     }
 }

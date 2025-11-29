@@ -8,6 +8,7 @@ use Baim\Belajar\PHP\MVC\Config\Database;
 use Baim\Belajar\PHP\MVC\Model\UserRegisterRequest;
 use Baim\Belajar\PHP\MVC\Repository\UserRepository;
 use Baim\Belajar\PHP\MVC\Exception\ValidationException;
+use Baim\Belajar\PHP\MVC\Model\UserLoginRequest;
 
 class UserController
 {
@@ -47,5 +48,30 @@ class UserController
                 'error' => $exception->getMessage()
             ]);
         }
+    }
+
+    public function login()
+    {
+        View::render('User/login', [
+            'title' => 'Login User',
+        ]);
+    }
+
+    public function postLogin()
+    {
+        $request = new UserLoginRequest();
+        $request->id = $_POST['id'];
+        $request->password = $_POST['password'];
+
+        try {
+            $this->userService->login($request);
+            View::redirect('/');
+        } catch (ValidationException $exception) {
+            View::render('User/login', [
+                'title' => 'Login User',
+                'error' => $exception->getMessage(),
+            ]);
+        }
+        
     }
 }
