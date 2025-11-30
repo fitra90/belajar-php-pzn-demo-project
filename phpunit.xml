@@ -15,5 +15,9 @@
         <testsuite name="test user controller">
             <file>tests/Controller/UserControllerTest.php</file>
         </testsuite>
+        <testsuite name="test session">
+            <file>tests/Repository/SessionRepositoryTest.php</file>
+            <file>tests/Service/SessionServiceTest.php</file>
+        </testsuite>
     </testsuites>
 </phpunit>
