@@ -3,7 +3,9 @@
 namespace Baim\Belajar\PHP\MVC\Controller;
 
 use Baim\Belajar\PHP\MVC\App\View;
+use Baim\Belajar\PHP\MVC\Repository\SessionRepository;
 use Baim\Belajar\PHP\MVC\Service\UserService;
+use Baim\Belajar\PHP\MVC\Service\SessionService;
 use Baim\Belajar\PHP\MVC\Config\Database;
 use Baim\Belajar\PHP\MVC\Model\UserRegisterRequest;
 use Baim\Belajar\PHP\MVC\Repository\UserRepository;
@@ -13,11 +15,15 @@ use Baim\Belajar\PHP\MVC\Model\UserLoginRequest;
 class UserController
 {
     private UserService $userService;
+    private SessionService $sessionService;
 
     public function __construct() {
         $connection = Database::getConnection();
         $userRepository = new UserRepository($connection);
         $this->userService = new UserService($userRepository);
+
+        $sessionRepository = new SessionRepository($connection);
+        $this->sessionService = new SessionService($sessionRepository, $userRepository);
     }
 
     public function register() 
@@ -64,7 +70,10 @@ class UserController
         $request->password = $_POST['password'];
 
         try {
-            $this->userService->login($request);
+            $response = $this->userService->login($request);
+
+            //set cookie
+            $this->sessionService->create($response->user->id);
             View::redirect('/');
         } catch (ValidationException $exception) {
             View::render('User/login', [
