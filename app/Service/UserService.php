@@ -10,6 +10,8 @@ use Baim\Belajar\PHP\MVC\Config\Database;
 use Baim\Belajar\PHP\MVC\Exception\ValidationException;
 use Baim\Belajar\PHP\MVC\Model\UserLoginRequest;
 use Baim\Belajar\PHP\MVC\Model\UserLoginResponse;
+use Baim\Belajar\PHP\MVC\Model\UserProfileUpdateRequest;
+use Baim\Belajar\PHP\MVC\Model\UserProfileUpdateResponse;
 use Exception;
 
 class UserService
@@ -84,6 +86,41 @@ class UserService
     {
         if ($request->id == null || $request->password == null || trim($request->id) == "" || trim($request->password) == "") {
             throw new ValidationException(("Id, password can not blank"));
+        }
+    }
+
+    public function updateProfile(UserProfileUpdateRequest $request): UserProfileUpdateResponse
+    {
+        $this->validateUserProfileUpdateRequest($request);
+
+        try {
+            Database::beginTransaction();
+            $user = $this->userRepository->findById($request->id);
+            
+            if ($user == null) {
+                throw new ValidationException("User is not found");
+            }
+
+            $user->name = $request->name;
+            $this->userRepository->update($user);
+
+            Database::commitTransaction();
+
+            $response = new UserProfileUpdateResponse();
+            $response->user = $user;
+            return $response;
+
+        } catch (\Exception $exception) {
+            Database::rollBackTransaction();
+            throw $exception;
+        }
+    }
+
+    private function validateUserProfileUpdateRequest(UserProfileUpdateRequest $request)
+    {
+        if ($request->id == null || $request->name == null || 
+            trim($request->id) == "" || trim($request->name) == "") {
+                throw new ValidationException("Id, Name can not blank");
         }
     }
 }

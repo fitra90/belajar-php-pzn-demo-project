@@ -19,5 +19,14 @@
             <file>tests/Repository/SessionRepositoryTest.php</file>
             <file>tests/Service/SessionServiceTest.php</file>
         </testsuite>
+        <testsuite name="test home controller">
+            <file>tests/Controller/HomeControllerTest.php</file>
+        </testsuite>
+        <testsuite name="test middleware">
+            <file>tests/Middleware/MustLoginMiddlewareTest.php</file>
+        </testsuite>
+        <testsuite name="test middleware not login">
+            <file>tests/Middleware/MustNotLoginMiddlewareTest.php</file>
+        </testsuite>
     </testsuites>
 </phpunit>

@@ -22,9 +22,12 @@
         "test" : "phpunit --configuration phpunit.xml",
         "test-render-view" : "phpunit --configuration phpunit.xml --testsuite \"test render view\"",
         "test-register-user" : "phpunit --configuration phpunit.xml --testsuite \"test register user\"",
-        "test-register-user-service" : "phpunit --configuration phpunit.xml --testsuite \"test register user service\"",
+        "test-user-service" : "phpunit --configuration phpunit.xml --testsuite \"test register user service\"",
         "test-user-controller" : "phpunit --configuration phpunit.xml --testsuite \"test user controller\"",
-        "test-session" : "phpunit --configuration phpunit.xml --testsuite \"test session\""
+        "test-session" : "phpunit --configuration phpunit.xml --testsuite \"test session\"",
+        "test-home-controller" : "phpunit --configuration phpunit.xml --testsuite \"test home controller\"",
+        "test-middleware" : "phpunit --configuration phpunit.xml --testsuite \"test middleware\"",
+        "test-middleware-not-login" : "phpunit --configuration phpunit.xml --testsuite \"test middleware not login\""
     },
     "autoload-dev": {
         "psr-4": {
