@@ -10,6 +10,8 @@ use Baim\Belajar\PHP\MVC\Config\Database;
 use Baim\Belajar\PHP\MVC\Exception\ValidationException;
 use Baim\Belajar\PHP\MVC\Model\UserLoginRequest;
 use Baim\Belajar\PHP\MVC\Model\UserLoginResponse;
+use Baim\Belajar\PHP\MVC\Model\UserPasswordUpdateRequest;
+use Baim\Belajar\PHP\MVC\Model\UserPasswordUpdateResponse;
 use Baim\Belajar\PHP\MVC\Model\UserProfileUpdateRequest;
 use Baim\Belajar\PHP\MVC\Model\UserProfileUpdateResponse;
 use Exception;
@@ -121,6 +123,18 @@ class UserService
         if ($request->id == null || $request->name == null || 
             trim($request->id) == "" || trim($request->name) == "") {
                 throw new ValidationException("Id, Name can not blank");
+        }
+    }
+
+    public function updatePassword(UserPasswordUpdateRequest $request, UserPasswordUpdateResponse $response)
+    {
+        $this->validateUserPasswordUpdateRequest($request);
+    }
+
+    private function validateUserPasswordUpdateRequest(UserPasswordUpdateRequest $request)
+    {
+        if ($request->id == null || $request->newPassword == null || $request->oldPassword == null || trim($request->id) == "" || trim($request->oldPassword) == "" || trim($request->newPassword) == "") {
+            throw new ValidationException(("Id, old password, new password can not blank"));
         }
     }
 }
