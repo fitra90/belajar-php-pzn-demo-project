@@ -1,22 +1,9 @@
 <?php
 
-namespace Baim\Belajar\PHP\MVC\App {
-    function header(string $value) 
-    {
-        echo $value;
-    }
-}
-
-namespace Baim\Belajar\PHP\MVC\Service {
-    function setcookie(string $name, string $value) 
-    {
-        echo "$name: $value";
-    }
-}
-
 namespace Baim\Belajar\PHP\MVC\Controller{
 
-    use Baim\Belajar\PHP\MVC\App\View;
+    require_once __DIR__ . '/../Helper/helper.php';
+
     use PHPUnit\Framework\TestCase;
     use Baim\Belajar\PHP\MVC\Config\Database;
     use Baim\Belajar\PHP\MVC\Repository\UserRepository;

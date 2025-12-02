@@ -2,18 +2,14 @@
 
 namespace Baim\Belajar\PHP\MVC\Service;
 
+require_once __DIR__ . '/../Helper/helper.php';
+
 use PHPUnit\Framework\TestCase;
 use Baim\Belajar\PHP\MVC\Config\Database;
 use Baim\Belajar\PHP\MVC\Domain\Session;
 use Baim\Belajar\PHP\MVC\Repository\SessionRepository;
 use Baim\Belajar\PHP\MVC\Domain\User;
 use Baim\Belajar\PHP\MVC\Repository\UserRepository;
-
-// dummy header response for testing
-function setCookie(string $name, string $value)
-{
-    echo "$name: $value";
-}
 
 class SessionServiceTest extends TestCase
 {

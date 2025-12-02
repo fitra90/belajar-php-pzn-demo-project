@@ -1,16 +1,9 @@
 <?php
 
-
-namespace Baim\Belajar\PHP\MVC\App {
-    function header(string $value) 
-    {
-        echo $value;
-    }
-}
-
-
 namespace Baim\Belajar\PHP\MVC\Middleware {
 
+    require_once __DIR__ . '/../Helper/helper.php';
+    
     use PHPUnit\Framework\TestCase;
     use Baim\Belajar\PHP\MVC\Domain\User;
     use Baim\Belajar\PHP\MVC\Domain\Session;
