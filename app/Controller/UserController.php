@@ -12,6 +12,8 @@ use Baim\Belajar\PHP\MVC\Model\UserRegisterRequest;
 use Baim\Belajar\PHP\MVC\Repository\UserRepository;
 use Baim\Belajar\PHP\MVC\Exception\ValidationException;
 use Baim\Belajar\PHP\MVC\Model\UserLoginRequest;
+use Baim\Belajar\PHP\MVC\Model\UserPasswordUpdateRequest;
+use Illuminate\Auth\Events\Validated;
 
 class UserController
 {
@@ -126,4 +128,40 @@ class UserController
             ]);
         }
     }
+
+    public function updatePassword()
+    {   
+        // pastikan sudah login
+        $user = $this->sessionService->current();
+
+        View::render('User/password', [
+            "title" => "Update user's password",
+            "user" => [
+                "id" => $user->id,
+            ]
+        ]);
+    }
+
+    public function postUpdatePassword()
+    {
+        $user = $this->sessionService->current();
+        $request = new UserPasswordUpdateRequest();
+        $request->id = $user->id;
+        $request->oldPassword = $_POST['oldPassword'];
+        $request->newPassword = $_POST['newPassword'];
+
+        try {
+            $this->userService->updatePassword($request);
+            View::redirect("/");
+        } catch (ValidationException $exception) {
+            View::render('User/password', [
+                "title" => "Update user's password",
+                "error" => $exception->getMessage(),
+                "user" => [
+                    "id" => $user->id,
+                ]
+            ]);
+        }
+    }
+
 }

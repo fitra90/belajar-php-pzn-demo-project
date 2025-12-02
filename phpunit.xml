@@ -9,7 +9,7 @@
         <testsuite name="test register user">
             <file>tests/Repository/UserRepositoryTest.php</file>
         </testsuite>
-        <testsuite name="test register user service">
+        <testsuite name="test user service">
             <file>tests/Service/UserServiceTest.php</file>
         </testsuite>
         <testsuite name="test user controller">

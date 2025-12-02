@@ -126,7 +126,7 @@ class UserService
         }
     }
 
-    public function updatePassword(UserPasswordUpdateRequest $request, UserPasswordUpdateResponse $response)
+    public function updatePassword(UserPasswordUpdateRequest $request): UserPasswordUpdateResponse
     {
         $this->validateUserPasswordUpdateRequest($request);
 
